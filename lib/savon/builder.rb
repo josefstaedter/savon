@@ -70,7 +70,6 @@ module Savon
     end
 
     def to_s
-      return @locals[:xml] if @locals.include? :xml
       build_document
     end
 
@@ -222,6 +221,7 @@ module Savon
     end
 
     def build_xml
+      return @locals[:xml] if @locals.include? :xml
       tag(builder, :Envelope, namespaces_with_globals) do |xml|
         tag(xml, :Header, header_attributes) { xml << header.to_s } unless header.empty?
         tag(xml, :Body, body_attributes) do
